@@ -8,6 +8,22 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
+    <video id="webcam-video" autoplay playsinline muted style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: 0;"></video>
+
+<script>
+  async function startWebcam() {
+    const video = document.getElementById("webcam-video");
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      video.srcObject = stream;
+    } catch (err) {
+      console.error("Ошибка доступа к камере:", err);
+    }
+  }
+
+  window.onload = startWebcam;
+</script>
+
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=1280 height=720 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
